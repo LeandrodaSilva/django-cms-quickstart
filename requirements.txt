@@ -170,3 +170,4 @@ whitenoise==6.9.0
 # The following packages are considered to be unsafe in a requirements file:
 # pip
 # setuptools
+mysqlclient==2.1.1
