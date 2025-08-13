@@ -1,0 +1,18 @@
+{% load sekizai_tags static cms_tags %}
+{% load i18n %}
+
+{% if instance %}
+    {% if instance.field_type == "text" %}
+        <div class="form-field-plugin">
+            <label>
+                {{ instance.label }}
+                <input type="{{ instance.field_type }}"
+                       name="{% if instance.name %}{{ instance.name }}{% else %}{{ instance.label|slugify }}-{{ instance.pk }}{% endif %}"
+                       class="form-control"
+                       {% if instance.required %}required{% endif %}
+                       autocomplete="off"
+                />
+            </label>
+        </div>
+    {%  endif %}
+{%  endif %}

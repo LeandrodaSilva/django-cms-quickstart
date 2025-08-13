@@ -1,0 +1,20 @@
+{% load sekizai_tags static cms_tags %}
+{% url 'form_app:submit_form' instance.form.id as default_action %}
+
+{% addtoblock "css" %}
+<link rel="stylesheet" href="{% static 'form_app/css/form_plugin.css' %}">
+{% endaddtoblock %}
+
+<div class="form-plugin">
+    <h1 class="form-plugin-title">{{ instance.form.name }}</h1>
+    <form method="post" action="{% firstof instance.form.action default_action %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}"/>
+        <div class="form-plugin-children">
+            {% for plugin in instance.child_plugin_instances %}
+                {% render_plugin plugin %}
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn-submit">Enviar</button>
+    </form>
+</div>

@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     'djangocms_frontend.contrib.image',
     'djangocms_frontend.contrib.tabs',
     'djangocms_frontend.contrib.utilities',
+    'form_app'
 ]
 
 MIDDLEWARE = [
@@ -230,3 +231,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 CMS_CONFIRM_VERSION4 = True
 DJANGOCMS_VERSIONING_ALLOW_DELETING_VERSIONS = True
+
+CMS_PLACEHOLDER_CONF = {
+    'form-content': {
+        'plugins': ['FormPlugin', 'FormFieldPlugin'],
+        'parent_classes': ['djangocms_frontend.contrib.content.plugin.ContentPlugin'],
+        'default_plugins': [
+            {
+                'plugin_type': 'FormFieldPlugin',
+                'values': {},
+            },
+        ],
+    }
+}
