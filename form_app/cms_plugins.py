@@ -1,7 +1,9 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
-from form_app.models import Hello, Form, FormPluginModel, FormFieldPlugin
+from django.contrib import admin
+from form_app.models import FormFieldOption, FormFieldPluginModel, Hello, Form, FormPluginModel
 from django.utils.translation import gettext_lazy as _
+
 
 @plugin_pool.register_plugin
 class HelloPlugin(CMSPluginBase):
@@ -17,6 +19,7 @@ class HelloPlugin(CMSPluginBase):
     def render(self, context, instance, placeholder):
         context.update({'instance': instance})
         return context
+
 
 @plugin_pool.register_plugin
 class FormAppPlugin(CMSPluginBase):
@@ -35,12 +38,21 @@ class FormAppPlugin(CMSPluginBase):
         context.update({'instance': instance})
         return context
 
+
+class FormFieldOptionInline(admin.TabularInline):
+    model = FormFieldOption
+    extra = 1
+    classes = ['collapse']
+
+
 @plugin_pool.register_plugin
 class FormFieldPlugin(CMSPluginBase):
-    model = FormFieldPlugin
+    model = FormFieldPluginModel
     name = _("Form Field Plugin")
     render_template = "form_field_plugin.html"
     cache = False
+    can_delete = True
+    inlines = [FormFieldOptionInline]
 
     class Meta:
         verbose_name = "Form Field Plugin"
