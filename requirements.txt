@@ -94,6 +94,8 @@ djangocms-text==0.9.1
 djangocms-versioning==2.3.2
     # via -r requirements.in
 easy-thumbnails[svg]==2.10
+
+django-autocomplete-light==3.11.0
     # via
     #   -r requirements.in
     #   django-filer
@@ -171,3 +173,4 @@ whitenoise==6.9.0
 # pip
 # setuptools
 mysqlclient==2.1.1
+requests==2.32.4

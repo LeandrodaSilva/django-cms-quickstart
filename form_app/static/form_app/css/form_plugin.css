@@ -1,27 +1,43 @@
-/* CSS do Form Plugin */
-.form-plugin {
-    padding: 1rem;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ddd;
-    max-width: 800px;
-    margin: 1rem auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    min-width: 300px;
-}
-.form-plugin-title { font-size: 1.25rem; margin-bottom: .75rem; }
-.btn-submit {
-    background:#1565c0;
-    color:#fff;
-    border:0;
-    padding:.5rem 1rem;
-    border-radius:4px;
-    margin-top: 1rem;
+body {
+  background-color: #c2c2c2ff;
 }
 
+.form-plugin {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border: 1px solid #9b9b9bff;
+  border-radius: 8px;
+}
+
+.form-plugin-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #409bb8;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #409bb8;
+  padding-bottom: 0.5rem;
+}
+
+.form-plugin form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.btn-submit {
+  background-color: #409bb8;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: #337d94;
+}
