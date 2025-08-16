@@ -1,7 +1,7 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.contrib import admin
-from form_app.models import FormFieldOption, FormFieldPluginModel, Hello, Form, FormPluginModel
+from form_app.models import FormFieldIBGEPluginModel, FormFieldOption, FormFieldPluginModel, Hello, FormPluginModel
 from django.utils.translation import gettext_lazy as _
 
 
@@ -57,6 +57,19 @@ class FormFieldPlugin(CMSPluginBase):
     class Meta:
         verbose_name = "Form Field Plugin"
         verbose_name_plural = "Form Field Plugins"
+
+    def render(self, context, instance, placeholder):
+        context.update({'instance': instance})
+        return context
+
+
+@plugin_pool.register_plugin
+class FormFIeldIBGEPlugin(CMSPluginBase):
+    model = FormFieldIBGEPluginModel
+    name = _("Form Field IBGE Plugin")
+    render_template = "form_field_ibge_plugin.html"
+    cache = False
+    can_delete = True
 
     def render(self, context, instance, placeholder):
         context.update({'instance': instance})

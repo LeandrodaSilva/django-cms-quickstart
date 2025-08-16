@@ -91,3 +91,22 @@ class FormFieldOption(models.Model):
 
     def __str__(self):
         return self.label
+
+
+class FormFieldIBGEPluginModel(CMSPlugin):
+    """Plugin do tipo select que carrega os dados de localidade da api do IBGE"""
+    label = models.CharField(
+        max_length=100, help_text="Rótulo do campo", default="Campo IBGE")
+    name = models.CharField(
+        max_length=100, help_text="Nome do campo (Usado no HTML)", blank=True)
+
+    required = models.BooleanField(
+        default=True, help_text="Campo obrigatório?")
+
+    class Meta:
+        app_label = 'form_app'
+        verbose_name = 'Campo da API'
+        verbose_name_plural = 'Campos da API'
+
+    def __str__(self):
+        return self.label

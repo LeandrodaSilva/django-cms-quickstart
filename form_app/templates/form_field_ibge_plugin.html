@@ -1,0 +1,36 @@
+{% load static sekizai_tags %}
+
+{% addtoblock "js" %}
+<script>
+    window.IBGE_API_URL = "{% url 'form_app:ibge_api' %}";
+    window.INSTANCE_PK = "{{ instance.pk }}";
+</script>
+<script src="{% static 'form_app/js/ibge_select_api.js' %}"></script>
+{% endaddtoblock %}
+
+{% addtoblock "css" %}
+   <link rel="stylesheet" href="{% static 'form_app/css/form_fields.css' %}">
+{% endaddtoblock %}
+
+
+<div class="form-field-plugin" style="margin-bottom: 1rem;">
+    <label for="estado-{{ instance.pk }}" class="form-label">Estado</label>
+    <select id="estado-{{ instance.pk }}"
+            class="form-control select2-field"
+            name="estado"
+            style="width: 100%;" required>
+        <option value="">Selecione o estado</option>
+        {% for estado in estados %}
+            <option value="{{ estado.sigla }}">{{ estado.nome }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div class="form-field-plugin" style="margin-bottom: 1rem;">
+    <label for="cidade-{{ instance.pk }}" class="form-label">Cidade</label>
+    <select id="cidade-{{ instance.pk }}"
+            name="cidade"
+            class="form-control select2-field" style="width: 100%;" disabled required>
+        <option value="">Selecione a cidade</option>
+    </select>
+</div>
