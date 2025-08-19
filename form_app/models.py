@@ -1,7 +1,7 @@
 from cms.models import CMSPlugin
 from django.db import models
 
-
+# Create your models here.
 class Form(models.Model):
     """Configuração do Formulário"""
     name = models.CharField(max_length=100)
@@ -21,7 +21,6 @@ class Form(models.Model):
     def __str__(self) -> str:
         return self.name
 
-
 class FormSubmission(models.Model):
     """Armazena as submissões do formulário"""
     form = models.ForeignKey(Form, on_delete=models.CASCADE)
@@ -33,17 +32,14 @@ class FormSubmission(models.Model):
         verbose_name = "Submissão de Formulário"
         verbose_name_plural = "Submissões de Formulário"
 
-
 class FormPluginModel(CMSPlugin):
     """Configuração do Formulário"""
     form = models.ForeignKey(Form, on_delete=models.CASCADE)
 
-
 class Hello(CMSPlugin):
     guest_name = models.CharField(max_length=50, default='Guest')
 
-
-class FormFieldPluginModel(CMSPlugin):
+class FormFieldPlugin(CMSPlugin):
     """Plugin para campos do formulário"""
     field_type = models.CharField(
         max_length=50,
@@ -57,37 +53,10 @@ class FormFieldPluginModel(CMSPlugin):
         default='text',
     )
     label = models.CharField(max_length=100, help_text="Rótulo do campo")
-    name = models.CharField(
-        max_length=100, help_text="Nome do campo (usado no HTML)", blank=True
-    )
-    required = models.BooleanField(
-        default=True, help_text="Campo obrigatório?")
+    name = models.CharField(max_length=100, help_text="Nome do campo (usado no HTML)", blank=True)
+    required = models.BooleanField(default=True, help_text="Campo obrigatório?")
 
     class Meta:
         app_label = 'form_app'
         verbose_name = "Campo do Formulário"
         verbose_name_plural = "Campos do Formulário"
-
-    def __str__(self):
-        return self.label
-
-
-class FormFieldOption(models.Model):
-    """Model do formField Select"""
-    plugin = models.ForeignKey(
-        FormFieldPluginModel,
-        on_delete=models.CASCADE,
-        related_name="options"
-    )
-    label = models.CharField(
-        max_length=100)
-    value = models.CharField(
-        max_length=100)
-
-    class Meta:
-        app_label = 'form_app'
-        verbose_name = "Opção de select"
-        verbose_name_plural = "Opções de select"
-
-    def __str__(self):
-        return self.label

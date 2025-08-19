@@ -1,40 +1,18 @@
-{% load static i18n sekizai_tags %}
+{% load sekizai_tags static cms_tags %}
+{% load i18n %}
 
-{% addtoblock "css" %}
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" rel="stylesheet" />
-{% endaddtoblock %}
-
-{% addtoblock "js" %}
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="{% static 'form_app/js/select2.js' %}"></script>
-{% endaddtoblock %}
-
-<div class="form-field-plugin" style="margin-bottom: 1rem;">
-    <label for="field-{{ instance.pk }}" class="form-label">
-        {{ instance.label }}
-    </label>
-
+{% if instance %}
     {% if instance.field_type == "text" %}
-        <input type="text"
-               id="field-{{ instance.pk }}"
-               name="{% if instance.name %}{{ instance.name }}{% else %}{{ instance.label|slugify }}-{{ instance.pk }}{% endif %}"
-               class="form-control"
-               {% if instance.required %}required{% endif %}
-               autocomplete="off">
-    
-    {% elif instance.field_type == "select" %}
-        <select id="field-{{ instance.pk }}"
-            name="{% if instance.name %}{{ instance.name }}{% else %}{{ instance.label|slugify }}-{{ instance.pk }}{% endif %}"
-            class="form-control select2-field"
-            style="width: 100%;"
-            {% if instance.required %}required{% endif %}>
-        <option value=""></option>
-        {% for option in instance.options.all %}
-            <option value="{{ option.value }}">{{ option.label }}</option>
-        {% endfor %}
-        </select>
-    {% endif %}
-
-</div>
+        <div class="form-field-plugin">
+            <label>
+                {{ instance.label }}
+                <input type="{{ instance.field_type }}"
+                       name="{% if instance.name %}{{ instance.name }}{% else %}{{ instance.label|slugify }}-{{ instance.pk }}{% endif %}"
+                       class="form-control"
+                       {% if instance.required %}required{% endif %}
+                       autocomplete="off"
+                />
+            </label>
+        </div>
+    {%  endif %}
+{%  endif %}

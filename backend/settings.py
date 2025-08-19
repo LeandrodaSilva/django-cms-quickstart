@@ -36,8 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    # http://whitenoise.evans.io/en/stable/django.html#using-whitenoise-in-development
-    'whitenoise.runserver_nostatic',
+    'whitenoise.runserver_nostatic',  # http://whitenoise.evans.io/en/stable/django.html#using-whitenoise-in-development
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
@@ -82,11 +81,7 @@ INSTALLED_APPS = [
     'djangocms_frontend.contrib.image',
     'djangocms_frontend.contrib.tabs',
     'djangocms_frontend.contrib.utilities',
-    'form_app',
-
-    # django autocomplete light
-    'dal',
-    'dal_select2',
+    'form_app'
 ]
 
 MIDDLEWARE = [
@@ -135,7 +130,7 @@ TEMPLATES = [
 THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.colorspace',
     'easy_thumbnails.processors.autocrop',
-    # 'easy_thumbnails.processors.scale_and_crop',
+    #'easy_thumbnails.processors.scale_and_crop',
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters',
 )
@@ -208,8 +203,7 @@ STATICFILES_DIRS = [  # this are were django staticfiles is looking for sources
 ]
 
 STATIC_URL = '/static/'
-# this is were the collected files are placed
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_collected')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_collected')  # this is were the collected files are placed
 
 # read the setting value from the environment variable. This functionality is
 # provided by https://github.com/divio/django-storage-url
